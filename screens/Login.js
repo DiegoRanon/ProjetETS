@@ -26,17 +26,45 @@ function Login(props) {
         false
     );
 
-    const handleSubmit = async () => {
-        
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        let reponseData = null;
+
+        try {
+           
+            reponseData = await sendRequest(
+                "http://localhost:5000/user/email/motdepasse",
+                "POST",
+                JSON.stringify({
+                    email: email,
+                    motdepasse: motdepasse,
+                }),
+                {
+                    "Content-Type": "application/json",
+                }
+            );
+            if (reponseData.success) {
+
+                console.log("Connecter")
+                history.push('/home');
+                auth.login(reponseData.etudiant.id);
+            }  else {
+                    alert("Compte inexistant.");
+                }
+            
+            } catch (err) {
+            console.log(err);
+            alert("An error noccurred while attempting to log in.");
+        }
     };
 
     return (
         <View style={styles.container}>
-            <Text>Connexion</Text>
+            <Text style={styles.title}>Connexion</Text>
             <View style={styles.formGroup}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Email"
+                    placeholder="Courriel"
                     value={email}
                     onChangeText={setEmail}
                     onInput={inputHandler}
@@ -52,8 +80,13 @@ function Login(props) {
                     onInput={inputHandler}
                 />
             </View>
-            <Button title="Connexion" onPress={handleSubmit} />
-            {}
+            <View style={styles.buttonContainer}>
+                <Button title="Connexion" onPress={handleSubmit} />
+            </View>
+            <View style={styles.buttonContainer}>
+                <Button title="Créer un compte" onPress={() => navigation.navigate('Register')}/>
+            </View>
+            
         </View>
     );
 }
@@ -62,17 +95,37 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#f0f0f0',
+        borderRadius: 20, 
+        padding: 20,
+        width: '100%',
+        height: '100%',
+    },
+    title: {
+        fontSize: 24,
+        fontFamily: 'Helvetica Neue',
+        marginBottom: 20,
     },
     formGroup: {
-        marginBottom: 15
+        marginBottom: 15,
+        width: '100%',
     },
     input: {
-        width: '80%',
         borderColor: 'gray',
         borderWidth: 1,
-        padding: 10
-    }
+        borderRadius: 8, 
+        padding: 10,
+        marginBottom: 10,
+        width: '100%',
+    },
+    buttonContainer: {
+        width: '100%', 
+        borderRadius: 8,
+        overflow: 'hidden',
+        padding: 10, 
+        marginBottom: 10,
+    },
 });
 
 export default Login;

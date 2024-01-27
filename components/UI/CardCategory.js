@@ -1,17 +1,16 @@
-import { View, StyleSheet, Text } from "react-native"
-import Title from "./Title";
+import { View, StyleSheet, Text, Pressable } from "react-native"
 
-// Affichage d'un produit
+// Affichage d'une categorie
 
 const styles = StyleSheet.create({
-    rootContainer : {
+    rootContainer: {
         borderWidth: 1,
         borderColor: "#ccc",
         borderRadius: 8,
         padding: 16,
         margin: 8,
-        width: 180, // Set the width to your desired value
-        height: 180, // Set the height to your desired value
+        width: 180,
+        height: 180,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#f0f0f0',
@@ -21,7 +20,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 4,
     },
-    titleText:{
+    titleText: {
         fontSize: 18,
         fontWeight: "bold",
         fontFamily: 'Helvetica Neue',
@@ -31,12 +30,14 @@ const styles = StyleSheet.create({
     }
 });
 
-function CardProduits({title, image, color}) {
+function CardCategory({ title, onPress, color }) {
     return (
-    <View style={[styles.rootContainer, {backgroundColor: color}]}>
-        <Text style={styles.titleText}>{title}</Text>
-    </View>
-    ) 
+        <View style={[styles.rootContainer, {backgroundColor: color}]}>
+            <Pressable onPress={onPress}>
+                <Text style={styles.titleText} numberOfLines={3}>{title}</Text>
+            </Pressable>
+        </View>
+    )
 }
 
-export default CardProduits;
+export default CardCategory;

@@ -3,14 +3,16 @@ class Product {
     id,
     title,
     description,
-    image
+    image,
+    category
+
     
   ) {
     this.id = id;
     this.title = title;
     this.description = description;
-    this.image = image
-    
+    this.image = image;
+    this.category = category;
   }
 }
 
