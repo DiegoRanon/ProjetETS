@@ -1,11 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Title from './components/UI/Title';
+import ListProduits from './screens/ListProduits';
+import Login from './screens/Login';
+import { NavigationContainer } from '@react-navigation/native'
+
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Test</Text>
-      <StatusBar style="auto" />
+      {
+        <NavigationContainer>
+          <Login />
+        </NavigationContainer>
+      }
+
+      {/*<ListProduits style={styles.list}/>*/}
+
     </View>
   );
 }
@@ -13,8 +25,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 32,
+    alignItems: "center"
   },
+  text: {
+    paddingTop: 30,
+    fontSize: 22,
+    alignContent: 'center'
+  },
+  list: {
+    paddingTop: 30
+  }
 });
