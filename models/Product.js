@@ -4,7 +4,8 @@ class Product {
     title,
     description,
     image,
-    category
+    category,
+    address
 
     
   ) {
@@ -13,6 +14,7 @@ class Product {
     this.description = description;
     this.image = image;
     this.category = category;
+    this.address = address;
   }
 }
 

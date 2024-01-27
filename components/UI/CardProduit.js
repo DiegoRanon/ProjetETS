@@ -1,10 +1,10 @@
-import { View, StyleSheet, Text } from "react-native"
+import { View, StyleSheet, Text, Pressable } from "react-native"
 import Title from "./Title";
 
 // Affichage d'un produit
 
 const styles = StyleSheet.create({
-    rootContainer : {
+    rootContainer: {
         borderWidth: 1,
         borderColor: "#ccc",
         borderRadius: 8,
@@ -21,22 +21,24 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 4,
     },
-    titleText:{
+    titleText: {
         fontSize: 18,
         fontWeight: "bold",
         fontFamily: 'Helvetica Neue',
         padding: 12,
         textAlign: 'center',
-        
+
     }
 });
 
-function CardProduits({title, image, color}) {
+function CardProduits({ title, image, color, onPress }) {
     return (
-    <View style={[styles.rootContainer, {backgroundColor: color}]}>
-        <Text style={styles.titleText}>{title}</Text>
-    </View>
-    ) 
+        <View style={[styles.rootContainer, { backgroundColor: color }]}>
+            <Pressable>
+                <Text style={styles.titleText}>{title}</Text>
+            </Pressable>
+        </View>
+    )
 }
 
 export default CardProduits;

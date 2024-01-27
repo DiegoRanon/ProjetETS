@@ -23,10 +23,13 @@ export default function App() {
 
   let drawerMode = (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator >
         <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Register" component={Register} />
-        <Drawer.Screen name="Category" component={ListCategory} />
+        <Drawer.Screen name="ListCategory" component={ListCategory} />
+        <Drawer.Screen name="ListProduit" component={ListProduits} />
+        <Drawer.Screen name="DetailProduit" component={ProductDetail} />
+        <Drawer.Screen name="addProduits" component={addProduits} />
       </Drawer.Navigator>
     </NavigationContainer>
 
@@ -53,17 +56,29 @@ export default function App() {
 
   return (
 
-
     <NavigationContainer>
-      <Drawer.Navigator >
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Register" component={Register} />
-        <Drawer.Screen name="ListCategory" component={ListCategory} />
-        <Drawer.Screen name="ListProduit" component={ListProduits} />
+      <Stack.Navigator>
+        {/** 
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
+        */
+        }
+        <Stack.Screen name="Category" component={ListCategory} />
+        <Stack.Screen name="Produits" component={ListProduits} options={({ route, navigation }) => {
+          const title = route.params.categoryTitle
+          return {
+            title: title
+          }
+        }} />
+        <Drawer.Screen name="addProduits" component={addProduits} options={({}) => {
+          return {
+            title: "Add Product"
+          }
+        }}/>
         <Drawer.Screen name="DetailProduit" component={ProductDetail} />
-        <Drawer.Screen name="addProduits" component={addProduits} />
-      </Drawer.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
+
 
 
   );

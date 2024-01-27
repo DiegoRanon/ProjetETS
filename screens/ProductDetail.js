@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Text } from "react-native"
+import { View, StyleSheet, ScrollView, Text, Button } from "react-native"
 import { PRODUCTS } from "../constants/dummy-data"
 import { Title } from "../components/UI/Title"
 
@@ -14,10 +14,14 @@ function ProductDetail({ navigation, route }) {
         <ScrollView>
             <Text style={styles.text}>{product.title}</Text>
             <View style={styles.rootDescription}>
-                <Text>Description: </Text>
-                <Text numberOfLines={5}>{product.description}</Text>
+                <Text style={styles.descriptionLabel}>Description: </Text>
+                <Text style={styles.descriptionText} numberOfLines={5}>{product.description}</Text>
             </View>
             {/*image a ajouter */}
+
+            <View style={styles.buttonContainer} >
+                <Button title="Demande d'echange" onPress={() => console.log("Demande d'echange pressed")} />
+            </View>
         </ScrollView>
     </View>)
 }
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
     rootDescription: {
         padding : 50,
         margin: 10,
-        height: 150,
+        height: 250,
         borderRadius: 8,
         elevation: 4,
         backgroundColor: 'white',
@@ -46,5 +50,19 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 8,
     },
-    
+    descriptionLabel: {
+        fontSize: 16,
+        fontStyle: 'italic',
+        textDecorationLine: 'underline',
+    },
+    descriptionText: {
+        fontSize: 16,
+    },
+    buttonContainer: {
+        width: '100%', 
+        borderRadius: 8,
+        overflow: 'hidden',
+        padding: 10, 
+        marginBottom: 10,
+    },
 })
