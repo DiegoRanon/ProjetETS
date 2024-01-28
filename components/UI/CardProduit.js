@@ -1,5 +1,7 @@
 import { View, StyleSheet, Text, Pressable } from "react-native"
 import Title from "./Title";
+import { useState } from "react";
+import IconButton from "./IconButton"
 
 // Affichage d'un produit
 
@@ -8,13 +10,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#ccc",
         borderRadius: 8,
-        padding: 16,
-        margin: 8,
-        width: 180, // Set the width to your desired value
-        height: 180, // Set the height to your desired value
+        padding: 14,
+        margin: 6,
+        width: 172, // Set the width to your desired value
+        height: 172, // Set the height to your desired value
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#FAFAFA',
         shadowColor: '#000',
         shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.1,
@@ -28,13 +30,36 @@ const styles = StyleSheet.create({
         padding: 12,
         textAlign: 'center',
 
+    },
+    iconButton: {
+        flex:1
     }
 });
 
-function CardProduits({ title, image, color, onPress }) {
+function CardProduits({ title, image, color, onPress, onDelete }) {
+    const [isPressed, setIsPressed] = useState(false);
+
+    const handlePressIn = () => {
+        setIsPressed(true);
+    };
+    
+    const handlePressOut = () => {
+        setIsPressed(false);
+    };
+
     return (
-        <View style={[styles.rootContainer, { backgroundColor: color }]}>
-            <Pressable>
+        <View style={[styles.rootContainer]}>
+            <Pressable 
+                onPress={onPress} 
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
+                style={({ pressed }) => [
+                    styles.rootContainer,
+                    {
+                      backgroundColor: pressed || isPressed ? 'lightblue' : color,
+                    },
+                  ]}
+            >
                 <Text style={styles.titleText}>{title}</Text>
             </Pressable>
         </View>

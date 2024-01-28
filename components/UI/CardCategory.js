@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         height: 180,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#FAFAFA',
         shadowColor: '#000',
         shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.1,
@@ -33,7 +33,9 @@ const styles = StyleSheet.create({
 function CardCategory({ title, onPress, color }) {
     return (
         <View style={[styles.rootContainer, {backgroundColor: color}]}>
-            <Pressable onPress={onPress}>
+            <Pressable 
+                onPress={onPress}       
+            >
                 <Text style={styles.titleText} numberOfLines={3}>{title}</Text>
             </Pressable>
         </View>

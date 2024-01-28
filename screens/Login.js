@@ -4,8 +4,10 @@ import { AuthContext } from '../shared/context/auth-context';
 import { useHttpClient } from "../shared/hooks/http-hook";
 import { useForm } from "../shared/hooks/form-hook";
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
-function Login(props) {
+function Login() {
+
     const navigation = useNavigation();
     const auth = useContext(AuthContext);
     const [email, setEmail] = useState('');
@@ -31,29 +33,23 @@ function Login(props) {
         let reponseData = null;
 
         try {
-           
             reponseData = await sendRequest(
-                "http://localhost:5000/user/email/motdepasse",
-                "POST",
-                JSON.stringify({
-                    email: email,
-                    motdepasse: motdepasse,
-                }),
-                {
-                    "Content-Type": "application/json",
-                }
+                `https://barter-go-api-qpo1.onrender.com/api/users/${email}/${motdepasse}`,
+                "GET"
             );
-            if (reponseData.success) {
+            console.log(reponseData)
+            if (!reponseData.success) {
+                const userId = reponseData.userId;
+                console.log(userId)
+                navigation.replace("Produits", {userId:userId})
+                
+            } else {
+                alert("Compte inexistant.");
+            }
 
-                console.log("Connecter")
-                history.push('/home');
-                auth.login(reponseData.etudiant.id);
-            }  else {
-                    alert("Compte inexistant.");
-                }
-            
-            } catch (err) {
+        } catch (err) {
             console.log(err);
+            alert(err);
             alert("An error noccurred while attempting to log in.");
         }
     };
@@ -84,9 +80,9 @@ function Login(props) {
                 <Button title="Connexion" onPress={handleSubmit} />
             </View>
             <View style={styles.buttonContainer}>
-                <Button title="Créer un compte" onPress={() => navigation.navigate('Register')}/>
+                <Button title="Créer un compte" onPress={() => navigation.navigate('Register')} />
             </View>
-            
+
         </View>
     );
 }
@@ -96,8 +92,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f0f0f0',
-        borderRadius: 20, 
+        backgroundColor: '#FAFAFA',
+        borderRadius: 20,
         padding: 20,
         width: '100%',
         height: '100%',
@@ -114,16 +110,16 @@ const styles = StyleSheet.create({
     input: {
         borderColor: 'gray',
         borderWidth: 1,
-        borderRadius: 8, 
+        borderRadius: 8,
         padding: 10,
         marginBottom: 10,
         width: '100%',
     },
     buttonContainer: {
-        width: '100%', 
+        width: '105%',
         borderRadius: 8,
         overflow: 'hidden',
-        padding: 10, 
+        padding: 10,
         marginBottom: 10,
     },
 });

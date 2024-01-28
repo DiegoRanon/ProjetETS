@@ -43,14 +43,13 @@ function CreateUserAccount(props) {
         try {
            
             reponseData = await sendRequest(
-                "https://barter-go-api.onrender.com/api/users",
+                "https://barter-go-api-qpo1.onrender.com/api/users",
                 "POST",
                 JSON.stringify({
                     firstName:prenom,
                     lastName:nom,
                     email: email,
                     rawPassword: motdepasse,
-                    
                 }),
                 {
                     "Content-Type": "application/json",
@@ -66,8 +65,6 @@ function CreateUserAccount(props) {
                 setEmail("");
                 setNumTel("");
                 setMotDePasse("");
-                setUserType("");
-                history.push('/login');
 
             } else {
                 alert("Creation of account failed. Please try again later.");
@@ -111,13 +108,13 @@ function CreateUserAccount(props) {
                 secureTextEntry={true}
             />
            
-            
             <View style={styles.buttonContainer}>
                 <Button 
                     title="Créer un compte" 
                     onPress={handleSubmit} 
                 />
             </View>
+            
             <View style={styles.buttonContainer}>
                 <Button 
                     title="Connexion" 
@@ -133,7 +130,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#FAFAFA',
         borderRadius: 20, 
         padding: 20,
         width: '100%',

@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     text: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: "bold",
         fontFamily: 'Helvetica Neue',
         padding: 12,
